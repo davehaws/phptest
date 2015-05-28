@@ -11,22 +11,16 @@ Setup
 =====
 To work on the tasks as a student you should:
 
- * have vagrant setup on your computer (please see wiki pages for help on this)
+ * install phpunit: https://phpunit.de/ or simply include it in your files
  * fork this repository
  * git clone your fork
  * cd to/your/cloned/fork
- * $ vagrant up
- * $ vagrant ssh
- * $ cd /vagrant/tasks/001
  * $ phpunit test.php
  * start coding your solutions
 
 To work on adding tasks to this codebase you should:
 
- * have vagrant setup on your computer (please see wiki pages for help on this)
+ * have phpunit setup on your computer (please see wiki pages for help on this)
  * git clone this repository
  * cd to your copy
- * $ vagrant up
- * $ vagrant ssh
- * $ cd /vagrant/tasks/001
  * $ phpunit test.php
