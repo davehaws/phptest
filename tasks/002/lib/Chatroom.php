@@ -22,4 +22,11 @@ class Chatroom {
     public function addClient(Client $client) {
         $this->occupants[$client->getName()] = $client;
     }
+
+    public function send(Client $from_client, $message) {
+        /* @var $occupant Client */
+        foreach ($this->getOccupants() as $occupant) {
+            $occupant->receive($from_client, $this, $message);
+        }
+    }
 }
