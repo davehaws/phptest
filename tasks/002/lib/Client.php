@@ -14,7 +14,7 @@ class Client {
         return $this->name;
     }
 
-    public function addListener($listener) {
+    public function addListener(Listener $listener) {
         $this->listener = $listener;
     }
 

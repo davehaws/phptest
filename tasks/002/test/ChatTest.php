@@ -82,7 +82,7 @@ class ChatTest extends PHPUnit_Framework_TestCase {
         $hots->addClient($client3);
         $hots->addClient($client4);
 
-        $listener = $this->getMock("Listener1", array("receive"));
+        $listener = $this->getMock("Listener", array("receive"));
         $listener->expects($this->at(0))
                 ->method("receive")
                 ->with($this->equalTo($client1), $this->equalTo($starcraft), $this->equalTo('Starcraft II is amazing.'));
@@ -93,7 +93,7 @@ class ChatTest extends PHPUnit_Framework_TestCase {
 
         $starcraft->send($client1, 'Starcraft II is amazing.');
 
-        $listener = $this->getMock("Listener2", array('receive'));
+        $listener = $this->getMock("Listener", array('receive'));
         $listener->expects($this->once())
                 ->method("receive")
                 ->with($this->equalTo($client2), $this->equalTo($hots), $this->equalTo('HotS is better than the original.'));
