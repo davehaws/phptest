@@ -12,4 +12,23 @@ class ChatroomTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($chatroom->getOccupants(), [], 'The occupant list should have been an empty array');
     }
 
+    private function createClients(array $names) {
+        $result = [];
+        foreach ($names as $name) {
+            $result[] = new Client($name);
+        }
+        return $result;
+    }
+
+    public function testAddClientsToChatroom() {
+        $chatroom = new Chatroom("Starcraft II");
+
+        $clients = $this->createClients(['bob', 'susan', 'dillan']);
+
+        foreach ($clients as $client) {
+            $chatroom->addClient($client);
+        }
+
+        $this->assertEquals($chatroom->getOccupants(), $clients);
+    }
 }

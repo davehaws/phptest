@@ -1,16 +1,8 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once('Client.php');
+require_once('Chatroom.php');
 
-/**
- * Description of Chat
- *
- * @author daveh_000
- */
 class Chat {
     private $clients;
     private $chatrooms;
@@ -20,6 +12,20 @@ class Chat {
         $this->chatrooms = [];
     }
 
+    public function getClients() {
+        return array_values($this->clients);
+    }
+
+    public function getChatrooms() {
+        return array_values($this->chatrooms);
+    }
+
+    /**
+     * Creates a client from the chat session
+     * If the chatroom name already exists, it just returns the previously created room
+     * @param string $name
+     * @return Client
+     */
     public function createClient($name) {
         if (!isset($this->clients[$name])) {
             $this->clients[$name] = new Client($name);
@@ -27,6 +33,12 @@ class Chat {
         return $this->clients[$name];
     }
 
+    /**
+     * Creates a chatroom from the chat session
+     * If the chatroom name already exists, it just returns the previously created room
+     * @param string $name
+     * @return Chatroom
+     */
     public function createChatroom($name) {
         if (!isset($this->chatrooms[$name])) {
             $this->chatrooms[$name] = new ChatRoom($name);
@@ -34,11 +46,4 @@ class Chat {
         return $this->chatrooms[$name];
     }
 
-    public function getClients() {
-        return $this->clients;
-    }
-
-    public function getChatrooms() {
-        return $this->chatrooms;
-    }
 }

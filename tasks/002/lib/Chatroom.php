@@ -1,5 +1,7 @@
 <?php
 
+require_once('Client.php');
+
 class Chatroom {
     private $name;
     private $occupants;
@@ -14,6 +16,10 @@ class Chatroom {
     }
 
     public function getOccupants() {
-        return $this->occupants;
+        return array_values($this->occupants);
+    }
+
+    public function addClient(Client $client) {
+        $this->occupants[$client->getName()] = $client;
     }
 }

@@ -3,7 +3,7 @@
 require_once(dirname(__FILE__).'/../lib/Chat.php');
 
 class ChatTest extends PHPUnit_Framework_TestCase {
-    
+
     public function testCreateChat() {
         $chat = new Chat();
 
@@ -12,6 +12,24 @@ class ChatTest extends PHPUnit_Framework_TestCase {
 
         $chatrooms = $chat->getChatrooms();
         $this->assertEquals($chatrooms, [], 'How come the chatroom array does not match empty array?');
+    }
+
+    public function testCreateDuplicateClients() {
+        $chat = new Chat();
+        $client1 = $chat->createClient('bob');
+        $client2 = $chat->createClient('susan');
+        $chat->createClient('bob');
+
+        $this->assertEquals($chat->getClients(), [$client1, $client2], 'We should have ended with 2 clients, bob and susan');
+    }
+
+    public function testCreateDuplicateChatrooms() {
+        $chat = new Chat();
+        $room1 = $chat->createChatroom('StarWars');
+        $room2 = $chat->createChatroom('StarTrek');
+        $chat->createChatroom('StarWars');
+
+        $this->assertEquals($chat->getChatrooms(), [$room1, $room2], 'We should have ended with 2 rooms, StarWars and StarTrek');
     }
 
 //    public function testSimpleMessaging() {
@@ -32,20 +50,20 @@ class ChatTest extends PHPUnit_Framework_TestCase {
 //
 //        $room->send($client1, 'Hey Susan');
 //    }
-//
-//    public function testRoomOccupants() {
-//        $chat = new Chat();
-//        $room = $chat->createChatroom("Starcraft II");
-//        $this->assertEquals($room->getOccupants(), array());
-//        $client1 = $chat->createClient("bob");
-//        $client2 = $chat->createClient("susan");
-//        $client3 = $chat->createClient("dillan");
-//        $room->addClient($client1);
-//        $room->addClient($client2);
-//        $room->addClient($client3);
-//        $this->assertEquals($room->getOccupants(), array($client1, $client2, $client3));
-//    }
-//
+
+    public function testRoomOccupants() {
+        $chat = new Chat();
+        $room = $chat->createChatroom("Starcraft II");
+        $this->assertEquals($room->getOccupants(), array());
+        $client1 = $chat->createClient("bob");
+        $client2 = $chat->createClient("susan");
+        $client3 = $chat->createClient("dillan");
+        $room->addClient($client1);
+        $room->addClient($client2);
+        $room->addClient($client3);
+        $this->assertEquals($room->getOccupants(), array($client1, $client2, $client3));
+    }
+
 //    public function testGroupChat() {
 //        $chat = new Chat();
 //        $client1 = $chat->createClient("bob");
